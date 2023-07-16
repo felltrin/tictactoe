@@ -111,14 +111,33 @@ class GUI:
         if self.button_txt7.get() == "X" or self.button_txt7.get() == "O":
             if self.button_txt7.get() == self.button_txt8.get() and self.button_txt8.get() == self.button_txt9.get():
                 self.winning_message()
+        if self.button_txt1.get() and self.button_txt2.get() and self.button_txt3.get() and self.button_txt4.get()\
+                and self.button_txt5.get() and self.button_txt6.get() and self.button_txt7.get() and self.button_txt8.get()\
+                and self.button_txt9.get():
+            self.disable_all_buttons()
+            if not messagebox.askyesno("Tic Tac Toe", "Sorry, this game is a draw, would you like to play again?"):
+                self.root.destroy()
+            else:
+                self.reset()
 
     def winning_message(self):
-        # print("Player " + self.player_turn + " has won!")
+        self.disable_all_buttons()
         if not messagebox.askyesno(title="Winner!", message="Congratulations! Player " + self.player_turn +
                                                             " won! Would you like to play again?"):
             self.root.destroy()
         else:
             self.reset()
+
+    def disable_all_buttons(self):
+        self.button1.config(state=DISABLED)
+        self.button2.config(state=DISABLED)
+        self.button3.config(state=DISABLED)
+        self.button4.config(state=DISABLED)
+        self.button5.config(state=DISABLED)
+        self.button6.config(state=DISABLED)
+        self.button7.config(state=DISABLED)
+        self.button8.config(state=DISABLED)
+        self.button9.config(state=DISABLED)
 
     def reset(self):
         self.button_txt1 = tk.StringVar()
